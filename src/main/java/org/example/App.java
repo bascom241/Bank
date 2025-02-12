@@ -13,9 +13,10 @@ public class App
         System.out.println( "Welcome " );
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         Bank bank = context.getBean("bank", Bank.class);
-        Map<String,Integer> users = bank.getUsers();
-        users.forEach((key,value)-> {
-            System.out.println("Account Holder " + ": " + key + " AccontBalance " + ": " + value);
-        });
+//        Map<String,Integer> users = bank.getUsers();
+//        users.forEach((key,value)-> {
+//            System.out.println("Account Holder " + ": " + key + " AccontBalance " + ": " + value);
+//        });
+        bank.startTransaction();
     }
 }
