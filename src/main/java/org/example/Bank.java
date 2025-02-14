@@ -15,7 +15,7 @@ public class Bank {
         this.transaction = transaction;
         this.store = store;
         this.users = new HashMap<>();
-        users.put(store.getUserName(), store.getAccountBalance());
+        users.put(store.getUserName().toLowerCase(), store.getAccountBalance());
     }
 
 
@@ -50,16 +50,40 @@ public class Bank {
         for(String transaction:transaction.getLoopedTransactions()){
             System.out.println(transaction);
         }
-        int selectedTransactionType;
+        int selectedTransactionType = 0;
         System.out.println("Please select transaction type using the index numbers");
-        try{
+        try {
 
 
-            if(scan.hasNextInt() ){
+            String key = null;
+
+            if (scan.hasNextInt()) {
                 selectedTransactionType = scan.nextInt();
-                if(selectedTransactionType > 0 && selectedTransactionType <4){
-                    String key = getKeyByValue(transaction.getTransactions(),selectedTransactionType);
+                if (selectedTransactionType > 0 && selectedTransactionType < 4) {
+                    key = getKeyByValue(transaction.getTransactions(), selectedTransactionType);
                     System.out.println("You Choose " + key);
+                }
+            }
+            switch (key) {
+                case "Deposit" -> {
+                    scan.nextLine();
+                    System.out.println("Please Enter Your account name");
+                    String userName = scan.nextLine().toLowerCase();
+
+
+                    if(users.containsKey(userName)){
+                        int currentUserBalance = users.get(userName);
+                        System.out.println("Please Enter Amount to be Deposited");
+                        int amount = scan.nextInt();
+                       if(amount != 0){
+                             currentUserBalance += amount;
+                             users.replace(userName,currentUserBalance);
+                             System.out.println(users.get(userName));
+
+                       }else{
+
+                       }
+                    }
                 }
             }
             scan.close();
@@ -67,8 +91,6 @@ public class Bank {
             System.out.println("Error " + e);
         }
     }
-
-
 
 
 
