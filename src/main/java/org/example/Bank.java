@@ -81,9 +81,34 @@ public class Bank {
                              System.out.println(users.get(userName));
 
                        }else{
-
+                            System.out.println("Invalid Amount Entered");
                        }
                     }
+                }
+                case "Withdraw" -> {
+                    scan.nextLine();
+                    System.out.println("Please enter Your UserName ");
+                    String userName = scan.nextLine().toLowerCase();
+
+                    if(users.containsKey(userName)){
+                        int currentUserBalance = users.get(userName);
+                        System.out.println("Please Enter the amount to withdraw");
+                        int amountToWithDraw = scan.nextInt();
+                        if(currentUserBalance > amountToWithDraw){
+                            currentUserBalance = currentUserBalance - amountToWithDraw;
+                            users.replace(userName,currentUserBalance);
+                            System.out.println("You have withdrawn " + amountToWithDraw);
+                            System.out.println("You Balance is  " + users.get(userName));
+                        }else{
+                            System.out.println("Insufficient Funds");
+                        }
+                    }else{
+                        System.out.println("We dont have your details in our database");
+                    }
+
+
+
+
                 }
             }
             scan.close();
