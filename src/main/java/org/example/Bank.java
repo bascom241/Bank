@@ -109,6 +109,16 @@ public class Bank {
 
 
 
+                } case "Balance" -> {
+                    scan.nextLine();
+                    System.out.println("Please enter Your userName");
+                    String userName = scan.nextLine().toLowerCase();
+
+                    if(users.containsKey(userName)){
+                        System.out.println("Dear " + userName + " Your Balance is " + users.get(userName));
+                    }else{
+                        System.out.println("We Dont have Your Details in Database ");
+                    }
                 }
             }
             scan.close();
